@@ -1,31 +1,31 @@
 ---
 name: camk-debug
-description: "Systematic debugging and error analysis. Use when: (1) User reports a bug or error, (2) Code behaves unexpectedly, (3) Need to investigate failures: reproduce → isolate → hypothesize → verify → fix. Provides structured approach and scripts for common debugging tasks."
+description: "Systematic debugging and error analysis for JS/TS (Node.js), Python, Go, and Vue.js. Use when: (1) User reports a bug or error, (2) Code behaves unexpectedly, (3) Need to investigate failures: reproduce → isolate → hypothesize → verify → fix. Provides structured approach and language-specific debugging guidance."
 ---
 
 # Debug & Analyze
 
-Systematic debugging methodology. Use when investigating bugs, errors, or unexpected behavior.
+Systematic debugging methodology. Use when investigating bugs, errors, or unexpected behavior in JS/TS, Python, Go, or Vue.js codebases.
 
 ## Core Workflow
 
 1. **Reproduce**
    - Confirm the bug exists
    - Document exact steps to reproduce
-   - Note environment (OS, version, config)
-   - Capture error messages and logs
+   - Note environment (Node version, Go version, browser, OS)
+   - Capture error messages, stack traces, and logs
 
 2. **Isolate**
-   - Narrow down the scope
+   - Narrow down the scope (which file, function, component)
    - Identify the minimal code path triggering the issue
-   - Check recent changes (git log, deployments)
+   - Check recent changes (`git log`, `git diff`)
    - Determine if environmental or code-related
 
 3. **Hypothesize**
    - List possible causes (top 3-5)
    - Rank by likelihood
-   - Consider edge cases and race conditions
-   - Check for similar issues in codebase
+   - Consider edge cases, race conditions, async ordering
+   - Check for similar issues in codebase or issue tracker
 
 4. **Verify**
    - Test each hypothesis systematically
@@ -43,6 +43,38 @@ Systematic debugging methodology. Use when investigating bugs, errors, or unexpe
    - Add regression test
    - Update documentation if needed
    - Consider if process/tooling can prevent recurrence
+
+## Language-Specific Debug Tools
+
+### JavaScript / TypeScript (Node.js)
+| Tool | Command | Use Case |
+|------|---------|----------|
+| Built-in debugger | `node --inspect` | Attach Chrome DevTools |
+| `console` | `console.table()`, `console.time()` | Quick inspection |
+| `debugger` | `debugger;` | Breakpoint in code |
+| Vitest | `vitest --reporter=verbose` | Test debugging |
+
+### Go
+| Tool | Command | Use Case |
+|------|---------|----------|
+| Delve | `dlv debug` | Interactive debugger |
+| Built-in trace | `go test -trace` | Trace goroutines |
+| Race detector | `go run -race` | Detect race conditions |
+| Profiler | `go tool pprof` | CPU/memory profiling |
+
+### Vue.js
+| Tool | Use Case |
+|------|----------|
+| Vue DevTools | Inspect component tree, props, state |
+| Browser DevTools | Breakpoints, network, console |
+| `console.log` | Reactive values (use `.value` for refs) |
+
+### Python
+| Tool | Command | Use Case |
+|------|---------|----------|
+| pdb | `import pdb; pdb.set_trace()` | Interactive debugger |
+| ipdb | `import ipdb; ipdb.set_trace()` | Enhanced debugger |
+| pytest | `pytest -s --tb=short` | Test debugging |
 
 ## Decision Tree
 
@@ -71,27 +103,30 @@ Apply fix <---------------+
 Verify fix + add test
 ```
 
-## Common Patterns
+## Common Patterns by Language
 
-### Null/Undefined Errors
-- Check initialization order
-- Verify data flow from source
-- Add defensive checks
+### JS/TS: Async/Await Issues
+- Missing `await` causing promise instead of value
+- Unhandled promise rejections
+- Race conditions in parallel `Promise.all`
 
-### Race Conditions
-- Check async/await usage
-- Verify lock/semaphore usage
-- Look for shared mutable state
+### Go: Concurrency Issues
+- Goroutine leaks (missing exit condition)
+- Channel deadlocks (send/receive mismatch)
+- Data races on shared state
+- Nil pointer dereference
 
-### Performance Issues
-- Profile before optimizing
-- Check N+1 queries
-- Verify caching strategy
+### Vue.js: Reactivity Issues
+- Destructured reactive object losing reactivity
+- Mutating props directly
+- Missing `key` in `v-for` causing stale DOM
+- Event handler not updating state
 
-### Memory Leaks
-- Check event listener cleanup
-- Verify resource disposal
-- Look for circular references
+### Python: Type/None Issues
+- `NoneType` has no attribute `x`
+- Mutable default arguments
+- Import circular dependencies
+- GIL blocking in CPU-intensive tasks
 
 ## References
 
