@@ -1,48 +1,26 @@
 # Dev Skill Pack
 
-Bộ skill hỗ trợ phát triển phần mềm gồm 4 skill: docs, dev, debug, brainstorm.
+Bộ skill hỗ trợ phát triển phần mềm gồm 5 skill: docs, dev, debug, brainstorm, git-push.
 
 ## Cài đặt
 
-### Cách 1: `--skills-dir` (test nhanh)
+```bash
+./install.sh
+```
+
+Script sẽ copy tất cả skill vào `~/.kimi/skills/`. Nếu skill đã tồn tại sẽ tự động replace.
+
+### Cách khác: `--skills-dir` (test nhanh)
 
 ```bash
 kimi --skills-dir /path/to/dev-skill-pack
 ```
 
-### Cách 2: `extra_skill_dirs` trong config (dùng lâu dài)
+### Cách khác: `extra_skill_dirs` trong config
 
-```bash
-# Mở config
-nano ~/.kimi/config.toml
-```
-
-Thêm dòng:
 ```toml
+# ~/.kimi/config.toml
 extra_skill_dirs = ["/path/to/dev-skill-pack"]
-```
-
-Sau đó chạy `kimi` bình thường.
-
-### Cách 3: Copy vào `~/.kimi/skills/` (khuyến nghị)
-
-```bash
-# Copy từng skill
-mkdir -p ~/.kimi/skills
-cp -r /path/to/dev-skill-pack/docs ~/.kimi/skills/
-cp -r /path/to/dev-skill-pack/dev ~/.kimi/skills/
-cp -r /path/to/dev-skill-pack/debug ~/.kimi/skills/
-cp -r /path/to/dev-skill-pack/brainstorm ~/.kimi/skills/
-```
-
-### Cách 4: Dùng `.skill` files
-
-```bash
-cd ~/.kimi/skills/
-unzip /path/to/dev-skill-pack/docs.skill
-unzip /path/to/dev-skill-pack/dev.skill
-unzip /path/to/dev-skill-pack/debug.skill
-unzip /path/to/dev-skill-pack/brainstorm.skill
 ```
 
 ## Các skill
@@ -53,12 +31,11 @@ unzip /path/to/dev-skill-pack/brainstorm.skill
 | **dev** | Flow | Code, review, conventions | `/flow:dev` |
 | **debug** | Standard | Debug lỗi, investigate | Tự động trigger |
 | **brainstorm** | Flow | Brainstorm, quyết định | `/flow:brainstorm` |
+| **git-push** | Flow | Push code lên branch | `/flow:git-push` |
 
 ## Sử dụng
 
 ### Flow skill — tương tác qua decision node
-
-Flow skill sẽ hỏi bạn chọn nhánh ở các decision node:
 
 ```
 Kimi: {What do you need?}
@@ -66,11 +43,6 @@ Kimi: {What do you need?}
       - Review code
       - Understand project
 
-You: <choice>Write code</choice>
-```
-
-Hoặc viết tự nhiên:
-```
 You: Write code
 ```
 
@@ -79,23 +51,6 @@ You: Write code
 ```
 You: "Fix bug này giúp tôi"        → debug tự trigger
 You: "Code feature X"              → dev tự trigger
-```
-
-## Cấu trúc flow
-
-### dev
-```
-Choose → Coding / Reviewing / Conventions
-```
-
-### docs
-```
-Identify → README / API docs / Architecture / Changelog / User guide → Review → Publish
-```
-
-### brainstorm
-```
-Frame → {Clear?} → Diverge → Evaluate → {Winner?} → Compare / Hybrid / Recommend → Next steps
 ```
 
 ## Scripts
@@ -110,58 +65,18 @@ Frame → {Clear?} → Diverge → Evaluate → {Winner?} → Compare / Hybrid /
 
 ### Skill không trigger
 
-1. Kiểm tra skill đã copy đúng chỗ:
-   ```bash
-   ls ~/.kimi/skills/dev/SKILL.md
-   ```
-
-2. Kiểm tra description có match không:
-   ```bash
-   head -5 ~/.kimi/skills/dev/SKILL.md
-   ```
-
-3. Restart Kimi session
+```bash
+ls ~/.kimi/skills/dev/SKILL.md
+head -5 ~/.kimi/skills/dev/SKILL.md
+```
 
 ### Flow lỗi khi chạy
 
-1. Kiểm tra flowchart syntax:
-   - Phải có đúng 1 `BEGIN` và 1 `END`
-   - Decision node phải có edge labels khác nhau
-   - Tất cả node phải reachable từ BEGIN
-
-2. Kiểm tra trong Kimi:
-   ```
-   /flow:dev
-   ```
-
-### Script không chạy
-
-1. Kiểm tra Python path:
-   ```bash
-   which python3
-   ```
-
-2. Kiểm tra input JSON:
-   ```bash
-   echo '{"module_path":"src/app.py"}' | python3 dev/scripts/generate_tests.py
-   ```
-
-## Tùy chỉnh
-
-### Thêm conventions cho project riêng
-
-Tạo file `references/project-conventions.md` trong `dev/`:
-
-```markdown
-# Project Conventions — [Tên project]
-
-## Tech Stack
-- Backend: FastAPI + SQLAlchemy
-- Frontend: React + TanStack Query
-
-## Quy tắc đặc biệt
-- API response luôn wrap trong `{data, error, meta}`
 ```
+/flow:dev
+```
+
+Kimi sẽ báo lỗi parse nếu flowchart sai syntax.
 
 ## License
 
