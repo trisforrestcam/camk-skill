@@ -1,5 +1,5 @@
 ---
-name: dev
+name: camk-dev
 description: "Development workflow — coding, reviewing, and project conventions. Use when: (1) User wants to write code, fix bugs, or refactor, (2) Need to review code or PR, (3) Starting work on a new codebase and need to understand conventions, (4) Any software development task that needs structure and quality gates."
 type: flow
 ---

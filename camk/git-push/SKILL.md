@@ -1,5 +1,5 @@
 ---
-name: git-push
+name: camk-git-push
 description: "Git push workflow. Use when: (1) User wants to push code to a branch, (2) Need to commit changes and push to remote, (3) Want to follow a safe workflow: check status → stage → commit → pull rebase → push. Prevents common git mistakes like pushing to wrong branch or overwriting remote changes."
 type: flow
 ---

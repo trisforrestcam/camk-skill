@@ -1,5 +1,5 @@
 ---
-name: docs
+name: camk-docs
 description: "Documentation and writing workflow. Use when: (1) User needs to write technical documentation, README, API docs, or changelogs, (2) Need to structure and organize documentation, (3) Want to ensure docs are clear, complete, and consistent with the codebase."
 type: flow
 ---
