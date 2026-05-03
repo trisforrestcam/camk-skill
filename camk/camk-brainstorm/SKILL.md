@@ -151,11 +151,16 @@ Edge cases cần xử lý:
 
 ### 5. DONE — Handoff
 
-**Goal:** Xác nhận spec với user, suggest next steps.
+**Goal:** Xác nhận spec với user, lưu file, suggest next steps.
 
 **Hành động:**
 - "Spec này có đủ để bắt đầu implement không?"
 - "Có phần nào cần clarify thêm không?"
+- **Lưu spec vào file:** Tạo file `.kimi/plan/<topic>.md` với nội dung spec đã finalize
+  - Filename: dùng kebab-case, ví dụ `realtime-notification.md`, `api-optimization.md`
+  - Nếu `.kimi/plan/` chưa tồn tại, tạo directory
+  - Nội dung file: spec output theo format chuẩn ở trên
+- Sau khi lưu xong, báo user: "Đã lưu spec vào `.kimi/plan/<file>.md`"
 - Suggest: "Khi ready, bạn có thể dùng `/skill:spec-propose` hoặc `/skill:camk-dev` để triển khai."
 
 ---
@@ -169,12 +174,14 @@ Edge cases cần xử lý:
 - ✅ Challenge assumptions nhẹ nhàng
 - ✅ Surface trade-offs rõ ràng
 - ✅ Dùng format chuẩn khi output spec cuối
+- ✅ Lưu spec vào `.kimi/plan/<topic>.md` sau khi user confirm
 
 ### DON'T
 - ❌ Đưa ra solution ngay từ turn đầu tiên
 - ❌ Fill in blanks mà không hỏi user
 - ❌ Brainstorm và evaluate cùng lúc
 - ❌ Output spec chưa đủ thông tin
+- ❌ Quên lưu file sau khi spec được confirm
 - ❌ Dùng jargon không giải thích
 - ❌ Dài dòng — mỗi turn nên ngắn gọn, tập trung
 
