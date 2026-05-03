@@ -14,17 +14,16 @@ if [ -d "${SKILLS_DIR}/camk" ]; then
     rm -rf "${SKILLS_DIR}/camk"
 fi
 
-# Install each camk-* skill directly into skills dir
-for skill in camk-brainstorm camk-debug camk-dev camk-docs camk-git-push; do
-    if [ -d "${SCRIPT_DIR}/camk/${skill}" ]; then
-        if [ -d "${SKILLS_DIR}/${skill}" ]; then
-            echo "  Replacing: ${skill}"
-            rm -rf "${SKILLS_DIR}/${skill}"
-        else
-            echo "  Installing: ${skill}"
-        fi
-        cp -r "${SCRIPT_DIR}/camk/${skill}" "${SKILLS_DIR}/"
+# Auto-discover and install every skill folder under camk/
+for skill_path in "${SCRIPT_DIR}/camk"/*/; do
+    skill=$(basename "${skill_path}")
+    if [ -d "${SKILLS_DIR}/${skill}" ]; then
+        echo "  Replacing: ${skill}"
+        rm -rf "${SKILLS_DIR}/${skill}"
+    else
+        echo "  Installing: ${skill}"
     fi
+    cp -r "${skill_path}" "${SKILLS_DIR}/"
 done
 
 echo "Done. Skills installed:"

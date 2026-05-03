@@ -1,6 +1,6 @@
 ---
 name: camk-brainstorm
-description: "Structured brainstorming and ideation workflow. Use when: (1) User wants to explore ideas, solutions, or approaches, (2) Need to evaluate multiple options before deciding, (3) Want structured output: problem framing → idea generation → evaluation → recommendation. Prevents premature convergence and ensures thorough exploration."
+description: Brainstorming workflow
 type: flow
 ---
 

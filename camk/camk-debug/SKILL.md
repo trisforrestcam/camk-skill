@@ -1,6 +1,6 @@
 ---
 name: camk-debug
-description: "Systematic debugging and error analysis for JS/TS (Node.js), Python, Go, and Vue.js. Use when: (1) User reports a bug or error, (2) Code behaves unexpectedly, (3) Need to investigate failures: reproduce → isolate → hypothesize → verify → fix. Provides structured approach and language-specific debugging guidance."
+description: Debug workflow
 ---
 
 # Debug & Analyze
