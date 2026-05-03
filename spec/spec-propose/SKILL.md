@@ -15,7 +15,7 @@ flowchart TD
     Spec --> Plan
     Plan[Create proposal.md and tasks.md with streams, phases, file ownership]
     Plan --> Handoff
-    Handoff[Present summary. Tell user they can edit files directly. When ready: /flow:spec-apply]
+    Handoff[Present summary. Tell user they can edit files directly. When ready: /skill:spec-apply]
     Handoff --> END([END])
 ```
 
