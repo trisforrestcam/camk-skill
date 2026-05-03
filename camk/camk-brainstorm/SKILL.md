@@ -1,46 +1,105 @@
 ---
 name: camk-brainstorm
-description: Brainstorming workflow
+description: Brainstorming and structured ideation workflow. Use when the user needs to generate ideas, evaluate options, compare approaches, make technical decisions, or plan solutions before implementation. Trigger on phrases like "brainstorm", "what are my options", "which approach should I choose", "help me decide", "evaluate trade-offs", "plan this feature", or when exploring multiple solutions to a problem.
 type: flow
 ---
 
 # Brainstorm Workflow
 
-Structured ideation that prevents premature convergence and ensures thorough exploration before recommendation.
+Structured ideation that prevents premature convergence.
 
-```mermaid
-flowchart TD
-    BEGIN([Begin]) --> FRAME
+```d2
+BEGIN -> FRAME
 
-    FRAME[Frame the problem<br/>- Restate the goal in own words<br/>- Identify constraints and boundaries<br/>- Clarify success criteria<br/>- Note implicit assumptions] --> {Problem clear?}
+FRAME: |md
+  Frame the problem
+  - Restate the goal in own words
+  - Identify constraints and boundaries
+  - Clarify success criteria
+  - Note implicit assumptions
+|
 
-    {Problem clear?} --> |Yes| DIVERGE
-    {Problem clear?} --> |Need refinement| REFINE
+FRAME -> PROBLEM_CLEAR
+PROBLEM_CLEAR: Problem clear?
+PROBLEM_CLEAR -> DIVERGE: Yes
+PROBLEM_CLEAR -> REFINE: Need refinement
 
-    REFINE[Refine problem statement<br/>- Break into sub-problems if too broad<br/>- Identify missing context<br/>- Ask targeted questions<br/>- Restate with user confirmation] --> FRAME
+REFINE: |md
+  Refine problem statement
+  - Break into sub-problems if too broad
+  - Identify missing context
+  - Ask targeted questions
+  - Restate with user confirmation
+|
+REFINE -> FRAME
 
-    DIVERGE[Generate ideas broadly<br/>- Brainstorm 5-10 distinct approaches<br/>- Include unconventional/outlier ideas<br/>- Mix incremental and radical solutions<br/>- Note pros/cons of each briefly] --> {Enough ideas?}
+DIVERGE: |md
+  Generate ideas broadly
+  - Brainstorm 5-10 distinct approaches
+  - Include unconventional/outlier ideas
+  - Mix incremental and radical solutions
+  - Note pros/cons of each briefly
+|
+DIVERGE -> ENOUGH_IDEAS
 
-    {Enough ideas?} --> |Yes| EVALUATE
-    {Enough ideas?} --> |Generate more| DIVERGE
+ENOUGH_IDEAS: Enough ideas?
+ENOUGH_IDEAS -> EVALUATE: Yes
+ENOUGH_IDEAS -> DIVERGE: Generate more
 
-    EVALUATE[Evaluate options systematically<br/>- Score against: feasibility, impact, effort, risk<br/>- Identify trade-offs between top candidates<br/>- Consider second-order effects<br/>- Check alignment with constraints] --> {Clear winner?}
+EVALUATE: |md
+  Evaluate options systematically
+  - Score against: feasibility, impact, effort, risk
+  - Identify trade-offs between top candidates
+  - Consider second-order effects
+  - Check alignment with constraints
+|
+EVALUATE -> CLEAR_WINNER
 
-    {Clear winner?} --> |Yes| RECOMMEND
-    {Clear winner?} --> |Need comparison| COMPARE
-    {Clear winner?} --> |Combine ideas| HYBRID
+CLEAR_WINNER: Clear winner?
+CLEAR_WINNER -> RECOMMEND: Yes
+CLEAR_WINNER -> COMPARE: Need comparison
+CLEAR_WINNER -> HYBRID: Combine ideas
 
-    COMPARE[Deep-dive comparison<br/>- Side-by-side analysis of top 2-3<br/>- Scenario testing: best case / worst case<br/>- Resource requirement breakdown<br/>- Time-to-value estimate] --> RECOMMEND
+COMPARE: |md
+  Deep-dive comparison
+  - Side-by-side analysis of top 2-3
+  - Scenario testing: best case / worst case
+  - Resource requirement breakdown
+  - Time-to-value estimate
+|
+COMPARE -> RECOMMEND
 
-    HYBRID[Design hybrid approach<br/>- Identify complementary elements<br/>- Merge best parts of multiple ideas<br/>- Check for conflicts or contradictions<br/>- Validate against constraints] --> EVALUATE
+HYBRID: |md
+  Design hybrid approach
+  - Identify complementary elements
+  - Merge best parts of multiple ideas
+  - Check for conflicts or contradictions
+  - Validate against constraints
+|
+HYBRID -> EVALUATE
 
-    RECOMMEND[Make recommendation<br/>- State recommended approach clearly<br/>- Explain why it wins over alternatives<br/>- Outline implementation path<br/>- Flag risks and mitigations] --> {User satisfied?}
+RECOMMEND: |md
+  Make recommendation
+  - State recommended approach clearly
+  - Explain why it wins over alternatives
+  - Outline implementation path
+  - Flag risks and mitigations
+|
+RECOMMEND -> USER_SATISFIED
 
-    {User satisfied?} --> |Yes| NEXT_STEPS
-    {User satisfied?} --> |Explore more| DIVERGE
-    {User satisfied?} --> |Tweak recommendation| RECOMMEND
+USER_SATISFIED: User satisfied?
+USER_SATISFIED -> NEXT_STEPS: Yes
+USER_SATISFIED -> DIVERGE: Explore more
+USER_SATISFIED -> RECOMMEND: Tweak recommendation
 
-    NEXT_STEPS[Define next steps<br/>- Immediate action items<br/>- Who does what<br/>- Decision points and timelines<br/>- How to validate the chosen path] --> END([End])
+NEXT_STEPS: |md
+  Define next steps
+  - Immediate action items
+  - Who does what
+  - Decision points and timelines
+  - How to validate the chosen path
+|
+NEXT_STEPS -> END
 ```
 
 ## Evaluation Criteria

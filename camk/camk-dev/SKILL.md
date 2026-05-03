@@ -1,6 +1,6 @@
 ---
 name: camk-dev
-description: Development workflow
+description: Development workflow for coding, implementation, code review, and project exploration. Use when the user needs to write code, implement features, fix bugs, refactor, review code, or understand an unfamiliar codebase. Trigger on phrases like "write code", "implement", "build this", "refactor", "code review", "review this PR", "explain this codebase", "how does this project work", or any software development task.
 type: flow
 ---
 
@@ -8,26 +8,39 @@ type: flow
 
 Orchestrator for all development tasks. Routes to the appropriate sub-workflow.
 
-```mermaid
-flowchart TD
-    BEGIN([Begin]) --> CHOOSE
+```d2
+BEGIN -> CHOOSE
 
-    CHOOSE{What do you need?} --> |Write code| CODING
-    CHOOSE --> |Review code| REVIEWING
-    CHOOSE --> |Understand project| CONVENTIONS
+CHOOSE: What do you need?
+CHOOSE -> CODING: Write code
+CHOOSE -> REVIEWING: Review code
+CHOOSE -> CONVENTIONS: Understand project
 
-    CODING[Load coding workflow<br/>- Understand → Plan → Implement<br/>- Test → Review → Deliver] --> END
+CODING: |md
+  Load coding workflow
+  - Understand -> Plan -> Implement
+  - Test -> Review -> Deliver
+|
+CODING -> END
 
-    REVIEWING[Load review workflow<br/>- Scope → Scan → Deep review<br/>- Categorize → Organize → Deliver] --> END
+REVIEWING: |md
+  Load review workflow
+  - Scope -> Scan -> Deep review
+  - Categorize -> Organize -> Deliver
+|
+REVIEWING -> END
 
-    CONVENTIONS[Load conventions guide<br/>- Detect stack<br/>- Understand structure<br/>- Read style config<br/>- Review existing code] --> END
-
-    END([End])
+CONVENTIONS: |md
+  Load conventions guide
+  - Detect stack
+  - Understand structure
+  - Read style config
+  - Review existing code
+|
+CONVENTIONS -> END
 ```
 
 ## Sub-workflows
-
-This skill coordinates three development activities:
 
 ### Coding
 When you need to implement features, fix bugs, or refactor:
