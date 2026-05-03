@@ -1,133 +1,90 @@
-# Cognitive Biases in Brainstorming
+# Cognitive Biases in Decision Making
 
-Biases distort judgment. Knowing them is the first defense. The second is process.
-
----
-
-## Common Biases in Technical Decision-Making
-
-### Anchoring Bias
-**What it is**: The first idea or number mentioned disproportionately influences all subsequent thinking.
-
-**Symptoms**:
-- The first proposed architecture becomes the "default"
-- Estimates cluster around the first number mentioned
-- "We started with X, so let's just tweak X"
-
-**Countermeasures**:
-- Generate ideas independently before sharing
-- Use structured techniques (SCAMPER, constraint-based)
-- Explicitly ask: "What would we do if we had never heard of X?"
+> Awareness of biases helps you catch them before they derail your brainstorm.
 
 ---
 
-### Confirmation Bias
-**What it is**: Seeking evidence that supports your existing belief while ignoring contradictory evidence.
+## Common Biases in Brainstorming
 
-**Symptoms**:
-- "This worked at my last company, so it'll work here"
-- Only reading documentation that supports your preferred tool
-- Dismissing failure cases as "edge cases"
+### 1. Anchoring Bias
+**What:** Dính vào idea/số đầu tiên nghe được.  
+**Example:** "NgườI đầu tiên suggest dùng Redis, cả team chỉ discuss Redis."  
+**Fix:** Randomize thứ tự present options. Viết ideas ra giấy trước khi discuss.
 
-**Countermeasures**:
-- Assign a "devil's advocate" role
-- Actively seek disconfirming evidence
-- Ask: "What would convince me this is the wrong choice?"
+### 2. Confirmation Bias
+**What:** Chỉ tìm evidence ủng hộ idea mình thích.  
+**Example:** "Tôi thích Option A, nên tôi chỉ tìm pros của A, ignore cons."  
+**Fix:** Assign "devil's advocate" — 1 ngườI bắt buộc argue AGAINST mỗi option.
 
----
+### 3. Sunk Cost Fallacy
+**What:** "Đã invest nhiều vào A nên phải chọn A."  
+**Example:** "Team đã code 3 tháng trên framework X, không thể đổi."  
+**Fix:** Evaluate từ zero. Ask: "Nếu bắt đầu lại từ đầu, chọn gì?"
 
-### Sunk Cost Fallacy
-**What it is**: Continuing an approach because of past investment, not future value.
+### 4. Availability Heuristic
+**What:** Đánh giá dựa trên ví dụ dễ nhớ nhất, không phải dữ kiện.  
+**Example:** "Tôi nhớ 1 lần Docker fail, nên reject Docker cho mọi project."  
+**Fix:** Dùng data, không dùng anecdote. Tính toán, không đoán.
 
-**Symptoms**:
-- "We've already spent 3 months on this framework..."
-- Keeping a broken architecture because migration is "too expensive"
-- Defending a decision because it was yours
+### 5. Bandwagon Effect
+**What:** Theo đám đông vì đám đông đang theo.  
+**Example:** "Mọi ngườI đều dùng Kubernetes, nên chúng ta cũng dùng."  
+**Fix:** "Nếu không có trend này, quyết định có khác không?"
 
-**Countermeasures**:
-- Evaluate decisions based on future value only
-- Ask: "If we were starting today, would we choose this?"
-- Separate the decision from the person who made it
+### 6. Overconfidence Bias
+**What:** Đánh giá thấp risk, đánh giá cao khả năng thành công.  
+**Example:** "Feature này đơn giản, 1 tuần xong." (thực tế 1 tháng)  
+**Fix:** Nhân estimate x2-x3. Dùng reference class forecasting.
 
----
+### 7. Framing Effect
+**What:** Quyết định thay đổi tùy cách present.  
+**Example:** "90% survival rate" vs "10% mortality rate" — cùng data, khác feel.  
+**Fix:** Present cả 2 frames. Dùng numbers thay vì words.
 
-### Availability Heuristic
-**What it is**: Overestimating the importance of ideas that are recent, vivid, or easy to recall.
+### 8. False Dichotomy
+**What:** Chỉ thấy 2 options khi thực tế có nhiều hơn.  
+**Example:** "Hoặc SQL hoặc NoSQL" — ignore NewSQL, graph DB, v.v.  
+**Fix:** Force tìm option thứ 3, thứ 4 trước khi chọn.
 
-**Symptoms**:
-- Picking the technology from the last conference talk you watched
-- Overweighting recent failures
-- "Everyone is talking about X, so it must be good"
+### 9. Halo Effect
+**What:** 1 điểm tốt làm sáng toàn bộ option.  
+**Example:** "Google dùng cái này → chắc tốt" (ignore context khác biệt)  
+**Fix:** Evaluate từng dimension độc lập.
 
-**Countermeasures**:
-- Use data over anecdotes
-- Deliberately seek out older, proven solutions
-- Apply structured scoring instead of gut feel
-
----
-
-### Groupthink
-**What it is**: A group prioritizes harmony over critical evaluation, leading to poor decisions.
-
-**Symptoms**:
-- No one raises objections
-- "We all agree, let's move on"
-- Dissenters stay quiet to avoid conflict
-
-**Countermeasures**:
-- Anonymous idea generation before discussion
-- Assign someone to play devil's advocate
-- Leader speaks last
-- Use "silent brainstorming" (write before talking)
+### 10. Planning Fallacy
+**What:** Underestimate time/effort cần thiết.  
+**Example:** Estimate 2 tuần, thực tế 2 tháng.  
+**Fix:** Dùng historical data. Nhân estimate x2 cho unknown unknowns.
 
 ---
 
-### Status Quo Bias
-**What it is**: Preferring the current state simply because it's familiar.
+## Bias Detection Checklist
 
-**Symptoms**:
-- "This is how we've always done it"
-- Rejecting change without evaluating it
-- Overestimating the cost of change
+Trước khi chốt decision, hỏi:
 
-**Countermeasures**:
-- Explicitly challenge the baseline
-- Ask: "If we were building this from scratch today, what would we do?"
-- Quantify the cost of *not* changing
-
----
-
-### Dunning-Kruger Effect
-**What it is**: People with limited knowledge overestimate their competence.
-
-**Symptoms**:
-- "This will take 2 days" (actually takes 2 weeks)
-- Dismissing complexity in unfamiliar domains
-- Overconfidence in estimates
-
-**Countermeasures**:
-- Calibrate estimates with historical data
-- Consult experts in unfamiliar domains
-- Use confidence intervals, not point estimates
+- [ ] Có đang dính vào idea đầu tiên không? (Anchoring)
+- [ ] Có ignore evidence trái chiều không? (Confirmation)
+- [ ] Có để quá khứ influence quyết định không? (Sunk Cost)
+- [ ] Có đang dùng anecdote thay vì data không? (Availability)
+- [ ] Có chọn vì "mọi ngườI đều làm" không? (Bandwagon)
+- [ ] Estimate có quá optimistic không? (Overconfidence)
+- [ ] Có present 1-sided không? (Framing)
+- [ ] Có ignore option thứ 3 không? (False Dichotomy)
+- [ ] Có đánh giá toàn diện không? (Halo Effect)
+- [ ] Timeline có realistic không? (Planning Fallacy)
 
 ---
 
-## Bias Prevention Checklist
+## Debiasing Techniques
 
-Before finalizing any brainstorm output, run through this:
+| Technique | How |
+|-----------|-----|
+| **Red Team** | 1 ngườI bắt buộc argue against |
+| **Pre-mortem** | Tưởng tượng project fail, tìm lý do |
+| **Reference Class** | So sánh với similar projects |
+| **Blind Evaluation** | Remove identifying info khỏi options |
+| **Devil's Advocate** | Rotate ngườI challenge ideas |
+| **Sleep On It** | Đợi 24h trước khi chốt |
+| **External Review** | Nhờ ngườI ngoài team review |
 
-- [ ] Did we generate ideas before evaluating any?
-- [ ] Did someone challenge the most popular idea?
-- [ ] Did we consider what we'd do if starting from scratch?
-- [ ] Are we using data or anecdotes to justify?
-- [ ] Did we estimate with confidence intervals?
-- [ ] Can someone explain why the leading option might fail?
-- [ ] Are we ignoring past investment when evaluating future value?
-
----
-
-## Further Reading
-
-- Thinking, Fast and Slow — Daniel Kahneman
-- Predictably Irrational — Dan Ariely
-- The Scout Mindset — Julia Galef
+→ Dùng `scripts/premortem.py` để chạy pre-mortem analysis.
