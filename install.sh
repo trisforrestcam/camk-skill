@@ -8,22 +8,25 @@ echo "Installing camk skill pack to ${SKILLS_DIR}..."
 
 mkdir -p "${SKILLS_DIR}"
 
-# Remove old camk/ folder if exists (from previous install)
-if [ -d "${SKILLS_DIR}/camk" ]; then
-    echo "  Removing old: camk"
-    rm -rf "${SKILLS_DIR}/camk"
-fi
-
-# Auto-discover and install every skill folder under camk/
-for skill_path in "${SCRIPT_DIR}/camk"/*/; do
-    skill=$(basename "${skill_path}")
-    if [ -d "${SKILLS_DIR}/${skill}" ]; then
-        echo "  Replacing: ${skill}"
-        rm -rf "${SKILLS_DIR}/${skill}"
-    else
-        echo "  Installing: ${skill}"
+# Remove old camk/ and spec/ folders if exists (from previous install)
+for old_pack in camk spec; do
+    if [ -d "${SKILLS_DIR}/${old_pack}" ]; then
+        echo "  Removing old: ${old_pack}"
+        rm -rf "${SKILLS_DIR}/${old_pack}"
     fi
-    cp -r "${skill_path}" "${SKILLS_DIR}/"
+done
+
+# Auto-discover and install every skill folder under camk/ and spec/
+for pack_dir in "${SCRIPT_DIR}/camk" "${SCRIPT_DIR}/spec"; do
+    for skill_path in "${pack_dir}"/*/; do
+        skill=$(basename "${skill_path}")
+        if [ -d "${SKILLS_DIR}/${skill}" ]; then
+            echo "  Removing existing: ${skill}"
+            rm -rf "${SKILLS_DIR}/${skill}"
+        fi
+        echo "  Installing: ${skill}"
+        cp -r "${skill_path}" "${SKILLS_DIR}/"
+    done
 done
 
 echo "Done. Skills installed:"
